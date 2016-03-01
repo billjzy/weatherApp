@@ -1,5 +1,5 @@
 $(document).ready(function(){
-        //var lonlat = new OpenLayers.LonLat(0, 0);
+        //var lonlat = new OpenLayers.LonLat(-73, 0);
 
         var map = new OpenLayers.Map('map',{
             maxResolution: 1000
