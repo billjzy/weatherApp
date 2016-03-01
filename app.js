@@ -7,6 +7,6 @@ var path = require('path');
 app.use(serve(__dirname+'/public'));
 
 
-app.listen(8080);
+app.listen(process.env.PORT || 5000);
 
 module.exports = app;
