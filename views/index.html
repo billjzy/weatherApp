@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Weather</title>
+
+	<script src="../public/angular.min.js"></script>
+	<script src='../public/index.js'></script>
+	<script src="http://openlayers.org/api/OpenLayers.js"></script>
+	<link rel="stylesheet" href="../public/bootstrap.min.css">
+	<link rel="stylesheet" href="../public/index.css">
+	
+	
+	<script src="../public/jquery.min.js"></script>
+	<script src="../public/bootstrap.min.js"></script>
+
+</head>
+<body ng-app='weatherApp' ng-controller='weatherCtrl'>
+	<nav class="navbar navbar-default">			
+			<a class='navbar-brand' href='http://openweathermap.org/'>Demo App</a>
+		
+			<div class='col-sm-10' id='search_group'>
+					<div class='navbar-nav col-sm-2' id='select_type'>
+						<select class='form-control' id='loc_selector' ng-model='selectType' ng-options='type for type in types'>
+						</select>
+					</div>
+					<div class='navbar-nav col-sm-4' id='search_location'>
+						<input class='form-control navbar-search' type='text' role='search' placeholder='search...' ng-model='location' ng-keyup='$event.keyCode == 13 && query()'>
+					</div>
+					<div class='navbar-nav col-sm-5'>
+						<p id='instruction' ng-bind='instruct()'></p>
+					</div>
+		
+			</div>
+
+	</nav>
+	<div class="alert alert-success col-sm-offset-3 col-sm-6" id='info' role="alert">Refresh the page if data missing, zooms the map to show</div>
+	<div class='row'>
+		<div class='col-sm-5 col-md-offset-1 main'>
+			<div class='panel panel-primary' >
+				<div class='panel-heading' id='today'> Today 
+					<span ng-bind='time'></span>
+					
+					<span ng-bind='data.weather[0].main'></span> 
+					
+					<span id='city' ng-bind='data.name'></span>
+					<span ng-bind='data.sys.country'></span> 
+				</div>
+				<div class='panel-body' id='today_info'>
+				   <h3>Temp: <span ng-bind='data.main.temp'></span>F°  <img src="http://openweathermap.org/img/w/{{data.weather[0].icon}}.png" class="weather_icon"> </h3>
+				   	
+					   <p> description: <span ng-bind='data.weather[0].description'></span> , low: <span ng-bind='data.main.temp_min'></span> F°/ high: <span ng-bind='data.main.temp_max'></span> F°</p> 
+					   <p> humidity: <span ng-bind='data.main.humidity'></span>%</p> 
+					   <p> Wind speed: <span ng-bind='data.wind.speed'></span> mph,  degree: <span ng-bind='data.wind.deg'></span></p>
+					   <p> cloudiness: <span ng-bind='data.clouds.all'></span> </p>				
+				</div>
+			</div>	
+
+			<div class='panel panel-primary' id='day2' ng-init='ifShow2=false'>
+				<div class='panel-heading' >
+					<span ng-bind='forecast.list[0].dt_txt'></span>
+					<span ng-bind='forecast.list[0].weather[0].main'></span>
+					<span class='caret' ng-click='ifShow2=!ifShow2'></span> 
+				</div>
+				<div class='panel-body' ng-init='forecast.list[0].clouds.all=0' ng-show='ifShow2'>
+					<h3>Temp  
+						<span ng-bind='forecast.list[0].main.temp'></span> F°<img src="http://openweathermap.org/img/w/{{forecast.list[0].weather[0].icon}}.png" class="weather_icon">
+					</h3>
+					<p>Description: <span ng-bind='forecast.list[0].weather[0].description'></span></p>
+					<p>pressure: <span ng-bind='forecast.list[0].main.pressure'></span> humidity: 
+						<span ng-bind='forecast.list[0].main.humidity'></span> 
+					</p>
+					<p>Wind speed: <span ng-bind='forecast.list[0].wind.speed'></span> deg: 
+						<span ng-bind='forecast.list[0].wind.deg'></span>
+					</p>
+					<p> cloudiness: <span ng-bind='forecast.list[0].clouds.all'></span>%</p>
+				</div>
+			</div> 
+
+			<div class='panel panel-primary'id='day3' ng-init='ifShow3=false'>
+				<div class='panel-heading'>{{forecast.list[8].dt_txt}}
+					<span>{{forecast.list[8].weather[0].main}}</span>
+					<span class='caret' ng-click='ifShow3=!ifShow3'></span> 
+				</div>
+				<div class='panel-body' ng-init='forecast.list[8].clouds.all=0' ng-show='ifShow3'>
+					<h3>Temp  {{ forecast.list[8].main.temp }} F°<img src="http://openweathermap.org/img/w/{{forecast.list[8].weather[0].icon}}.png" class="weather_icon"></h3>
+					<p>Description: {{forecast.list[8].weather[0].description}}</p>
+					<p>pressure: {{forecast.list[8].main.pressure}}  humidity: {{forecast.list[8].main.humidity}}  </p>
+					<p>Wind speed: {{forecast.list[8].wind.speed}} deg: {{forecast.list[8].wind.deg}}</p>
+					<p> cloudiness: {{forecast.list[8].clouds.all}}%</p>
+				</div>
+			</div> 
+				
+			<div class='panel panel-primary'id='day4' ng-init='ifShow4=false'>
+				<div class='panel-heading'>{{forecast.list[16].dt_txt}}
+					<span>{{forecast.list[16].weather[0].main}}</span>
+					<span class='caret' ng-click='ifShow4=!ifShow4'></span> 
+				</div>
+				<div class='panel-body' ng-init='forecast.list[16].clouds.all=0' ng-show='ifShow4'>
+					<h3>Temp  {{ forecast.list[16].main.temp }} F°<img src="http://openweathermap.org/img/w/{{forecast.list[16].weather[0].icon}}.png" class="weather_icon"></h3>
+					<p>Description: {{forecast.list[16].weather[0].description}}</p>
+					<p>pressure: {{forecast.list[16].main.pressure}}  humidity: {{forecast.list[16].main.humidity}}  </p>
+					<p>Wind speed: {{forecast.list[16].wind.speed}} deg: {{forecast.list[16].wind.deg}}</p>
+					<p> cloudiness: {{forecast.list[16].clouds.all}}%</p>
+				</div>
+			</div> 
+
+			<div class='panel panel-primary'id='day5' ng-init='ifShow5=false'>
+				<div class='panel-heading'>{{forecast.list[24].dt_txt}}
+					<span>{{forecast.list[24].weather[0].main}}</span>
+					<span class='caret' ng-click='ifShow5=!ifShow5'></span> 
+				</div>
+				<div class='panel-body' ng-init='forecast.list[24].clouds.all=0' ng-show='ifShow5'>
+					<h3>Temp  {{ forecast.list[24].main.temp }} F°<img src="http://openweathermap.org/img/w/{{forecast.list[24].weather[0].icon}}.png" class="weather_icon"></h3>
+					<p>Description: {{forecast.list[24].weather[0].description}}</p>
+					<p>pressure: {{forecast.list[24].main.pressure}}  humidity: {{forecast.list[24].main.humidity}}  </p>
+					<p>Wind speed: {{forecast.list[24].wind.speed}} deg: {{forecast.list[24].wind.deg}}</p>
+					<p> cloudiness: {{forecast.list[24].clouds.all}}%</p>
+				</div>
+			</div> 
+		</div> 
+		
+		<div class='col-sm-5'>
+			<div id='map' class='map'></div>				
+			<script defer="defer" type="text/javascript" src='../public/openlayers.js'></script>		
+		</div>
+		<div class='col-sm-5' id='map_opts'>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox1" checked="checked"> Rain
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox2" checked="checked"> Precipitation
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox3" checked="checked"> Temperature
+			</label>
+			<label class="checkbox-inline">
+			  <input type="checkbox" id="inlineCheckbox4" checked="checked"> Clouds
+			</label>
+		</div>
+	</div>	
+
+<hr>
+<footer>
+	<p id='footer'>Zhangyi Jin 2016<br>
+		zj54@njit.edu
+	</p>
+</footer>
+</body>
+
+
+</html>
