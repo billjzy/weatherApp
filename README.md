@@ -19,7 +19,7 @@ See a demo on [Heroku](http://weatherapp-zhangyi-jin.herokuapp.com/)
 * Bootstrap
 * Node.js - Koa framework
 
-> AngularJS send GET quests to public APIs
+> AngularJS sends GET requests to public APIs
 > Node.js as http server listens on port 8080, @localhost 
 > node.js working as a static server, sends html to the client
 
@@ -29,7 +29,7 @@ Source code [weather app](https://github.com/billjzy/weatherApp)
 
  ### Run
 
-Start the server, listening on port 8080 @localhost
+Start the server, listening on port 5000 @localhost
 
 ```sh
 $ node --harmony app.js
