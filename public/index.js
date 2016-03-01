@@ -2,7 +2,7 @@
 	var app = angular.module('weatherApp', [])
 		 .controller('weatherCtrl', function($scope,$http){
 			var suffix = "&units=imperial&appid=44db6a862fba0b067b1930da0d769e98";
-			var prefix = "https://api.openweathermap.org/data/2.5/"	
+			var prefix = "http://api.openweathermap.org/data/2.5/"	
 			var that = $scope;	
 			var date =  new Date();
 			$scope.time = date.getFullYear() + '-' +date.getMonth()+'-'+date.getDate();

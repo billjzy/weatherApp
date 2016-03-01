@@ -6,7 +6,7 @@
 
 	<script type="text/javascript" src="angular.min.js"></script>
 	<script type="text/javascript" src="index.js"></script>
-	<script type="text/javascript" src="https://openlayers.org/api/OpenLayers.js"></script>
+	<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
 	<link rel="stylesheet" href="bootstrap.min.css">
 	<link rel="stylesheet" href="index.css">
 	
@@ -47,7 +47,7 @@
 					<span ng-bind='data.sys.country'></span> 
 				</div>
 				<div class='panel-body' id='today_info'>
-				   <h3>Temp: <span ng-bind='data.main.temp'></span>F°  <img src="https://openweathermap.org/img/w/{{data.weather[0].icon}}.png" class="weather_icon"> </h3>
+				   <h3>Temp: <span ng-bind='data.main.temp'></span>F°  <img src="http://openweathermap.org/img/w/{{data.weather[0].icon}}.png" class="weather_icon"> </h3>
 				   	
 					   <p> description: <span ng-bind='data.weather[0].description'></span> , low: <span ng-bind='data.main.temp_min'></span> F°/ high: <span ng-bind='data.main.temp_max'></span> F°</p> 
 					   <p> humidity: <span ng-bind='data.main.humidity'></span>%</p> 
@@ -83,7 +83,7 @@
 					<span class='caret' ng-click='ifShow3=!ifShow3'></span> 
 				</div>
 				<div class='panel-body' ng-init='forecast.list[8].clouds.all=0' ng-show='ifShow3'>
-					<h3>Temp  {{ forecast.list[8].main.temp }} F°<img src="https://openweathermap.org/img/w/{{forecast.list[8].weather[0].icon}}.png" class="weather_icon"></h3>
+					<h3>Temp  {{ forecast.list[8].main.temp }} F°<img src="http://openweathermap.org/img/w/{{forecast.list[8].weather[0].icon}}.png" class="weather_icon"></h3>
 					<p>Description: {{forecast.list[8].weather[0].description}}</p>
 					<p>pressure: {{forecast.list[8].main.pressure}}  humidity: {{forecast.list[8].main.humidity}}  </p>
 					<p>Wind speed: {{forecast.list[8].wind.speed}} deg: {{forecast.list[8].wind.deg}}</p>
@@ -97,7 +97,7 @@
 					<span class='caret' ng-click='ifShow4=!ifShow4'></span> 
 				</div>
 				<div class='panel-body' ng-init='forecast.list[16].clouds.all=0' ng-show='ifShow4'>
-					<h3>Temp  {{ forecast.list[16].main.temp }} F°<img src="https://openweathermap.org/img/w/{{forecast.list[16].weather[0].icon}}.png" class="weather_icon"></h3>
+					<h3>Temp  {{ forecast.list[16].main.temp }} F°<img src="http://openweathermap.org/img/w/{{forecast.list[16].weather[0].icon}}.png" class="weather_icon"></h3>
 					<p>Description: {{forecast.list[16].weather[0].description}}</p>
 					<p>pressure: {{forecast.list[16].main.pressure}}  humidity: {{forecast.list[16].main.humidity}}  </p>
 					<p>Wind speed: {{forecast.list[16].wind.speed}} deg: {{forecast.list[16].wind.deg}}</p>
@@ -111,7 +111,7 @@
 					<span class='caret' ng-click='ifShow5=!ifShow5'></span> 
 				</div>
 				<div class='panel-body' ng-init='forecast.list[24].clouds.all=0' ng-show='ifShow5'>
-					<h3>Temp  {{ forecast.list[24].main.temp }} F°<img src="https://openweathermap.org/img/w/{{forecast.list[24].weather[0].icon}}.png" class="weather_icon"></h3>
+					<h3>Temp  {{ forecast.list[24].main.temp }} F°<img src="http://openweathermap.org/img/w/{{forecast.list[24].weather[0].icon}}.png" class="weather_icon"></h3>
 					<p>Description: {{forecast.list[24].weather[0].description}}</p>
 					<p>pressure: {{forecast.list[24].main.pressure}}  humidity: {{forecast.list[24].main.humidity}}  </p>
 					<p>Wind speed: {{forecast.list[24].wind.speed}} deg: {{forecast.list[24].wind.deg}}</p>
