@@ -1,6 +1,7 @@
 # My Weather App
 
 This weather app is powered by [openweathermap](http://openweathermap.org/) api
+See a demo on [Heroku](https://weatherapp-zhangyi-jin.herokuapp.com/)
 
   - Switch search type, eg by zip code, by coordinates, by city name
   - Show 5  days forecast information
